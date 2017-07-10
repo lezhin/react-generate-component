@@ -1,0 +1,9 @@
+{
+  "output": "./src",
+  "filenames": {
+    "main": "[name].js",
+    "style": "[name].scss",
+    "test": "[name].test.js",
+    "index": "index.js"
+  }
+}
