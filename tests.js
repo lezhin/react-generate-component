@@ -8,7 +8,7 @@ const capitalize = require('capitalize');
 const {generate, pretting} = require('./index');
 const config = require('./config');
 
-describe('Greeting 테스트', () => {
+describe('Greeting Test', () => {
     beforeEach(() => {
         mock({
             'project1': {},
@@ -24,8 +24,8 @@ describe('Greeting 테스트', () => {
         mock.restore();
     });
 
-    describe('파일 생성 테스트', () => {
-        it('Component 이름을 생략하면 에러가 발생한다.', () => {
+    describe('Test to create files', () => {
+        it('Should occur error when name of component is omitted.', () => {
             // Given
             // When
             return generate()
@@ -36,7 +36,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('Component 이름을 전달하면 컴포넌트, 스타일, 테스트, 메인 파일이 생성된다.', () => {
+        it('Should generate component, style, test and main file when pass name of component.', () => {
             // Given
             // When
             return generate(['hello'])
@@ -50,7 +50,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('Component 이름을 2개 전달하면 컴포넌트, 스타일, 테스트, 메인 파일이 각각 생성된다.', () => {
+        it('Should generate each component, style, test and main file when pass multiple name of component.', () => {
             // Given
             // When
             return generate(['hello', 'world'])
@@ -68,7 +68,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.output의 값을 "./components"로 지정하면 해당 디렉터리 하위에 파일이 생성된다.', () => {
+        it('Should generate files under the directory when pass value of customConfig.output as "./components."', () => {
             // Given
             const customConfig = {
                 output: './components'
@@ -86,7 +86,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.filenames.main의 값을 "[name].jsx"로 지정하면 지정한 이름으로 컴포넌트 파일이 생성된다.', () => {
+        it('Should generate component file as appointed name when pass value of customConfig.filenames.main as "[name].jsx."', () => {
             // Given
             const customConfig = {
                 filenames: {main: '[name].jsx'}
@@ -101,7 +101,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.filenames.style의 값을 "[name].sass"로 지정하면 지정한 이름으로 스타일 파일이 생성된다.', () => {
+        it('Should generate style file as appointed name when pass value of customConfig.filenames.style as "[name].scss."', () => {
             // Given
             const customConfig = {
                 filenames: {style: '[name].sass'}
@@ -116,7 +116,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.filenames.test의 값을 "[name].test.js"로 지정하면 지정한 이름으로 테스트 파일이 생성된다.', () => {
+        it('Should generate test file as appointed name when pass value of customConfig.filenames.test as "[name].test.js."', () => {
             // Given
             const customConfig = {
                 filenames: {test: '[name].test.js'}
@@ -131,7 +131,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.filenames.index의 값을 "export.js"로 지정하면 지정한 이름으로 메인 파일이 생성된다.', () => {
+        it('Should generate main file as appointed name when pass value of customConfig.filenames.index as "[name].js."', () => {
             // Given
             const customConfig = {
                 filenames: {index: 'export.js'}
@@ -146,7 +146,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('컴포넌트를 생성할 디렉터리가 이미 존재하면 파일 생성이 무시된다.', () => {
+        it('Should ignore command when same name exist.', () => {
             process.chdir('../project2');
 
             // Given
@@ -159,7 +159,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('컴포넌트를 여러개 생성 할 때 이미 존재하는 디렉터리를 제외한 컴포넌트만 생성된다.', () => {
+        it('Should generate not existing files.', () => {
             process.chdir('../project2');
 
             // Given
@@ -176,7 +176,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('allowOverride 인자를 true로 전달하면 디렉터리가 이미 존재해도 파일이 생성된다.', () => {
+        it('Should generate files and override existing files when pass existallowOverride as true.', () => {
             process.chdir('../project2');
 
             // Given
@@ -195,8 +195,8 @@ describe('Greeting 테스트', () => {
         });
     });
 
-    describe('템플릿 코드 생성 테스트', () => {
-        it('config.templates의 main() 반환값이 컴포넌트 파일의 코드가 된다.', () => {
+    describe('Test to create template code', () => {
+        it('Should be become code of component file with return value of main() of config.templates.', () => {
             // Given
             // When
             return generate(['hello'])
@@ -210,7 +210,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('config.templates의 style() 반환값이 스타일 파일의 코드가 된다.', () => {
+        it('Should be become code of style file with return value of style() of config.templates.', () => {
             // Given
             // When
             return generate(['hello'])
@@ -224,7 +224,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('config.templates의 test() 반환값이 테스트 파일의 코드가 된다.', () => {
+        it('Should be become code of test file with return value of test() of config.templates.', () => {
             // Given
             // When
             return generate(['hello'])
@@ -238,7 +238,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('config.templates의 index() 반환값이 메인 파일의 코드가 된다.', () => {
+        it('Should be become code of main file with return value of index() of config.templates.', () => {
             // Given
             // When
             return generate(['hello'])
@@ -252,7 +252,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.templates의 main()를 전달하면 그 함수의 반환값이 컴포넌트 파일의 코드가 된다.', () => {
+        it('Should be become code of component file with return value of passed main() to customConfig.templates.', () => {
             // Given
             const customConfig = {
                 templates: {
@@ -274,7 +274,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.templates의 style()를 전달하면 그 함수의 반환값이 스타일 파일의 코드가 된다.', () => {
+        it('Should be become code of style file with return value of passed style() to customConfig.templates.', () => {
             // Given
             const customConfig = {
                 templates: {
@@ -296,7 +296,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.templates의 test()를 전달하면 그 함수의 반환값이 테스트 파일의 코드가 된다.', () => {
+        it('Should be become code of test file with return value of passed test() to customConfig.templates.', () => {
             // Given
             const customConfig = {
                 templates: {
@@ -318,7 +318,7 @@ describe('Greeting 테스트', () => {
                 });
         });
 
-        it('customConfig.templates의 index()를 전달하면 그 함수의 반환값이 메인 파일의 코드가 된다.', () => {
+        it('Should be become code of main file with return value of passed index() to customConfig.templates.', () => {
             // Given
             const customConfig = {
                 templates: {
