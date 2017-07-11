@@ -1,5 +1,5 @@
 {
-  "name": "react-generate-component",
+  "name": "@lezhin/react-generate-component",
   "version": "0.0.1",
   "description": "",
   "bin": {
@@ -25,5 +25,13 @@
     "test": "istanbul cover -x tests.js _mocha -- tests.js -R spec"
   },
   "author": "UYEONG <uyeong21c@gmail.com> (http://blog.coderifleman.com/)",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lezhin/react-generate-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lezhin/react-generate-component/issues"
+  },
+  "homepage": "https://github.com/lezhin/react-generate-component#readme"
 }
