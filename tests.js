@@ -8,7 +8,7 @@ const capitalize = require('capitalize');
 const {generate, pretting} = require('./index');
 const config = require('./config');
 
-describe('Greeting Test', () => {
+describe('Test to React generate component', () => {
     beforeEach(() => {
         mock({
             'project1': {},
