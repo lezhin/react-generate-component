@@ -101,7 +101,7 @@ describe('Test to React generate component', () => {
                 });
         });
 
-        it('Should generate style file as appointed name when pass value of customConfig.filenames.style as "[name].scss."', () => {
+        it('Should generate style file as appointed name when pass value of customConfig.filenames.style as "[name].sass."', () => {
             // Given
             const customConfig = {
                 filenames: {style: '[name].sass'}
@@ -131,7 +131,7 @@ describe('Test to React generate component', () => {
                 });
         });
 
-        it('Should generate main file as appointed name when pass value of customConfig.filenames.index as "[name].js."', () => {
+        it('Should generate main file as appointed name when pass value of customConfig.filenames.index as "export.js."', () => {
             // Given
             const customConfig = {
                 filenames: {index: 'export.js'}
@@ -176,7 +176,7 @@ describe('Test to React generate component', () => {
                 });
         });
 
-        it('Should generate files and override existing files when pass existallowOverride as true.', () => {
+        it('Should generate files and override existing files when pass allowOverride as true.', () => {
             process.chdir('../project2');
 
             // Given
