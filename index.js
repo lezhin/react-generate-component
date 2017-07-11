@@ -10,6 +10,16 @@ const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
 const mkdir = promisify(mkdirp);
 
+function pretting(code, parser = 'babylon') {
+    return prettier.format(code, {
+        tabWidth: 4,
+        bracketSpacing: false,
+        singleQuote: true,
+        jsxBracketSameLine: true,
+        parser: parser
+    });
+}
+
 function generate(componentNames, customConfig = {}, allowOverride = false) {
     if (!componentNames || componentNames.length === 0) {
         const error = new Error('Error: Provide a component name');
@@ -17,7 +27,7 @@ function generate(componentNames, customConfig = {}, allowOverride = false) {
         return Promise.reject(error);
     }
 
-    const config = extend(true, require('./config'), customConfig);
+    const config = extend(true, {}, require('./config'), customConfig);
     const {output, filenames, templates} = config;
 
     return Promise.all(componentNames.map((name) => {
@@ -35,13 +45,10 @@ function generate(componentNames, customConfig = {}, allowOverride = false) {
                 const fullpath = path.join(filepath, filename);
 
                 return mkdir(filepath).then(() => {
-                    const source = prettier.format(templates[key](name), {
-                        tabWidth: 4,
-                        bracketSpacing: false,
-                        singleQuote: true,
-                        jsxBracketSameLine: true,
-                        parser: filename.indexOf('scss') !== -1 ? 'postcss' : 'babylon'
-                    });
+                    const source = pretting(
+                        templates[key](name),
+                        key === 'style' ? 'postcss' : 'babylon'
+                    );
 
                     return writeFile(fullpath, source, 'utf8');
                 }).then(() => {
@@ -56,4 +63,7 @@ function generate(componentNames, customConfig = {}, allowOverride = false) {
     });
 }
 
-module.exports = generate;
+module.exports = {
+    generate,
+    pretting
+};

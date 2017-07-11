@@ -17,11 +17,12 @@
   },
   "devDependencies": {
     "chai": "4.0.2",
+    "istanbul": "0.4.5",
     "mocha": "3.4.2",
     "mock-fs": "4.4.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover -x tests.js _mocha -- tests.js -R spec"
   },
   "author": "UYEONG <uyeong21c@gmail.com> (http://blog.coderifleman.com/)",
   "license": "MIT"

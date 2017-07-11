@@ -2,7 +2,7 @@
 
 const path = require('path');
 const program = require('commander');
-const generate = require('./index');
+const {generate} = require('./index');
 const {args, config, override} = program
     .version('0.0.1')
     .usage('[options] <name ...>')
