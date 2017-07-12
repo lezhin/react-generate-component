@@ -17,12 +17,14 @@
   },
   "devDependencies": {
     "chai": "4.0.2",
+    "codecov": "2.2.0",
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
     "mock-fs": "4.4.1"
   },
   "scripts": {
-    "test": "istanbul cover -x tests.js _mocha -- tests.js -R spec"
+    "test": "istanbul cover -x tests.js _mocha -- tests.js -R spec",
+    "codecov": "cat .coverage/lcov.info | codecov"
   },
   "author": "UYEONG <uyeong21c@gmail.com> (http://blog.coderifleman.com/)",
   "license": "MIT",
