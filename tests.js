@@ -4,6 +4,7 @@ require('prettier/parser-postcss');
 const fs = require('fs');
 const mock = require('mock-fs');
 const expect = require('chai').expect;
+const sinon = require('sinon');
 const capitalize = require('capitalize');
 const {generate, pretting} = require('./index');
 const config = require('./config');
@@ -337,6 +338,71 @@ describe('Test to React generate component', () => {
                     const compiledCode = pretting(customConfig.templates.index(capitalize('hello')));
 
                     expect(indexCode).to.equal(compiledCode);
+                });
+        });
+    });
+
+    describe('Test to hookscripts code', () => {
+        it('customConfig.hookscripts에 pre()를 전달하면 컴포넌트 생성이 시작되기 전에 호출된다.', () => {
+            // Given
+            const spy = sinon.spy();
+            const customConfig = {
+                hookscripts: {
+                    pre: spy
+                }
+            };
+
+            // When
+            return generate(['hello'], customConfig)
+
+            // Then
+                .then(() => {
+                    expect(spy.callCount).to.equal(1);
+                    expect(spy.args[0][0]).to.same.members(['Hello']);
+                    expect(spy.args[0][1]).to.be.an('object');
+                });
+        });
+
+        it('customConfig.hookscripts에 post()를 전달하면 컴포넌트가 모두 생성된 후 호출된다.', () => {
+            // Given
+            const spy = sinon.spy();
+            const customConfig = {
+                hookscripts: {
+                    post: spy
+                }
+            };
+
+            // When
+            return generate(['hello'], customConfig)
+
+            // Then
+                .then(() => {
+                    expect(spy.callCount).to.equal(1);
+                    expect(spy.args[0][0]).to.same.members(['Hello']);
+                    expect(spy.args[0][1]).to.be.an('object');
+                    expect(spy.args[0][2]).to.be.an('object');
+                });
+        });
+
+        it('customConfig.hookscripts의 post() 세 번째 인자에는 컴포넌트 생성 성공 여부가 전달된다.', () => {
+            process.chdir('../project2');
+
+            // Given
+            const spy = sinon.spy();
+            const customConfig = {
+                hookscripts: {
+                    post: spy
+                }
+            };
+
+            // When
+            return generate(['hello', 'world', 'wow'], customConfig)
+
+            // Then
+                .then(() => {
+                    expect(spy.args[0][2]['Hello']).to.equal(false);
+                    expect(spy.args[0][2]['World']).to.equal(true);
+                    expect(spy.args[0][2]['Wow']).to.equal(true);
                 });
         });
     });

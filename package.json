@@ -21,7 +21,8 @@
     "codecov": "2.2.0",
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
-    "mock-fs": "4.4.1"
+    "mock-fs": "4.4.1",
+    "sinon": "2.3.7"
   },
   "scripts": {
     "test": "istanbul cover -x tests.js _mocha -- tests.js -R spec",

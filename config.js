@@ -56,5 +56,9 @@ module.exports = {
                 export default ${name};
             `);
         }
+    },
+    hookscripts : {
+        pre(names, config) {},
+        post(names, config, result) {}
     }
 };

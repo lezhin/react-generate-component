@@ -27,12 +27,15 @@ function generate(componentNames, customConfig = {}, allowOverride = false) {
         return Promise.reject(error);
     }
 
+    componentNames = componentNames.map((c) => capitalize(c));
+
     const config = extend(true, {}, require('./config'), customConfig);
-    const {output, filenames, templates} = config;
+    const {output, filenames, templates, hookscripts} = config;
+    const result = {};
+
+    hookscripts.pre(componentNames, config);
 
     return Promise.all(componentNames.map((name) => {
-        name = capitalize(name);
-
         const filepath = path.join(path.resolve(output), name);
 
         return new Promise((resolve, reject) => {
@@ -55,11 +58,15 @@ function generate(componentNames, customConfig = {}, allowOverride = false) {
                     console.info(clc.greenBright(`Info: Created ${path.join(output, name, filename)}`));
                 });
             }));
+        }).then(() => {
+            result[name] = true;
         }).catch((err) => {
+            result[name] = false;
             console.error(clc.red(err.message));
         });
     })).then(() => {
         console.info(clc.cyan('Info: Completed!'));
+        hookscripts.post(componentNames, config, result);
     });
 }
 
