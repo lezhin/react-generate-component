@@ -5,7 +5,7 @@ const fs = require('fs');
 const mock = require('mock-fs');
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const capitalize = require('capitalize');
+const Case = require('case');
 const {generate, pretting} = require('./index');
 const config = require('./config');
 
@@ -205,7 +205,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const componentCode = fs.readFileSync('src/Hello/Hello.js', 'utf8');
-                    const compiledCode = pretting(config.templates.main(capitalize('hello')));
+                    const compiledCode = pretting(config.templates.main(Case.pascal('hello')));
 
                     expect(componentCode).to.equal(compiledCode);
                 });
@@ -219,7 +219,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const styleCode = fs.readFileSync('src/Hello/Hello.scss', 'utf8');
-                    const compiledCode = pretting(config.templates.style(capitalize('hello')), 'postcss');
+                    const compiledCode = pretting(config.templates.style(Case.pascal('hello')), 'postcss');
 
                     expect(styleCode).to.equal(compiledCode);
                 });
@@ -233,7 +233,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const testCode = fs.readFileSync('src/Hello/Hello.spec.js', 'utf8');
-                    const compiledCode = pretting(config.templates.test(capitalize('hello')));
+                    const compiledCode = pretting(config.templates.test(Case.pascal('hello')));
 
                     expect(testCode).to.equal(compiledCode);
                 });
@@ -247,7 +247,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const indexCode = fs.readFileSync('src/Hello/index.js', 'utf8');
-                    const compiledCode = pretting(config.templates.index(capitalize('hello')));
+                    const compiledCode = pretting(config.templates.index(Case.pascal('hello')));
 
                     expect(indexCode).to.equal(compiledCode);
                 });
@@ -269,7 +269,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const componentCode = fs.readFileSync('src/Hello/Hello.js', 'utf8');
-                    const compiledCode = pretting(customConfig.templates.main(capitalize('hello')));
+                    const compiledCode = pretting(customConfig.templates.main(Case.pascal('hello')));
 
                     expect(componentCode).to.equal(compiledCode);
                 });
@@ -291,7 +291,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const styleCode = fs.readFileSync('src/Hello/Hello.scss', 'utf8');
-                    const compiledCode = pretting(customConfig.templates.style(capitalize('hello')), 'postcss');
+                    const compiledCode = pretting(customConfig.templates.style(Case.pascal('hello')), 'postcss');
 
                     expect(styleCode).to.equal(compiledCode);
                 });
@@ -313,7 +313,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const testCode = fs.readFileSync('src/Hello/Hello.spec.js', 'utf8');
-                    const compiledCode = pretting(customConfig.templates.test(capitalize('hello')));
+                    const compiledCode = pretting(customConfig.templates.test(Case.pascal('hello')));
 
                     expect(testCode).to.equal(compiledCode);
                 });
@@ -335,7 +335,7 @@ describe('Test to React generate component', () => {
             // Then
                 .then(() => {
                     const indexCode = fs.readFileSync('src/Hello/index.js', 'utf8');
-                    const compiledCode = pretting(customConfig.templates.index(capitalize('hello')));
+                    const compiledCode = pretting(customConfig.templates.index(Case.pascal('hello')));
 
                     expect(indexCode).to.equal(compiledCode);
                 });
