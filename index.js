@@ -4,7 +4,7 @@ const promisify = require('util.promisify');
 const clc = require('cli-color');
 const prettier = require('prettier');
 const extend = require('extend');
-const capitalize = require('capitalize');
+const Case = require('case');
 const mkdirp = require('mkdirp');
 const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
@@ -27,7 +27,7 @@ function generate(componentNames, customConfig = {}, allowOverride = false) {
         return Promise.reject(error);
     }
 
-    componentNames = componentNames.map((c) => capitalize(c));
+    componentNames = componentNames.map((c) => Case.pascal(c));
 
     const config = extend(true, {}, require('./config'), customConfig);
     const {output, filenames, templates, hookscripts} = config;

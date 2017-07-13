@@ -7,7 +7,6 @@
   },
   "main": "index.js",
   "dependencies": {
-    "capitalize": "1.0.0",
     "case": "1.5.3",
     "cli-color": "1.2.0",
     "commander": "2.11.0",
