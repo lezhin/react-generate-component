@@ -12,6 +12,6 @@ const {args, config, override} = program
 
 generate(
     args,
-    (config && path.resolve(config)) || path.join(process.cwd(), '/rgc.config.js'),
+    require((config && path.resolve(config)) || path.join(process.cwd(), '/rgc.config.js')),
     override
 );
