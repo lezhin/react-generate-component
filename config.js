@@ -1,3 +1,5 @@
+const Case = require('case');
+
 module.exports = {
     output: './src',
     filenames: {
@@ -12,7 +14,7 @@ module.exports = {
                 import React from 'react';
         
                 const ${name} = ({children}) => (
-                    <div className="${name.toLowerCase()}">
+                    <div className="${Case.kebab(name)}">
                         {children}
                     </div>
                 );
@@ -26,7 +28,7 @@ module.exports = {
                 // Style of ${name}
                 // ------------------------------------- //
                 
-                $module: '${name.toLowerCase()}';
+                $module: '${Case.kebab(name)}';
                 
                 .#{$module} {
                     // ...
